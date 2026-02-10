@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicine Inventory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Medicine Inventory</h1>
+
+    <!-- Form to add medicine -->
+    <form id="medicineForm">
+      <input type="text" id="medName" placeholder="Medicine Name" required>
+       <select id="medType" required>
+        <option value="Generic">Generic</option>
+        <option value="Brand">Brand</option>
+      </select>
+      <input type="number" id="medQty" placeholder="Quantity" min="0" required>
+      <input type="date" id="medExp" placeholder="Expiration Date" required>
+
+      <button type="submit">Add Medicine</button>
+    </form>
+
+    <h2>Current Inventory</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Quantity</th>
+          <th>Expiration Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="inventoryList"></tbody>
+    </table>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

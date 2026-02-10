@@ -1,6 +1,7 @@
 import PocketBase from 'https://cdn.jsdelivr.net/npm/pocketbase@0.14.0/dist/pocketbase.es.mjs';
 
-const pb = new PocketBase('http://127.0.0.1:8090'); // Your PocketBase URL
+// ✅ Replace with your remote PocketBase URL
+const pb = new PocketBase('http://127.0.0.1:8090'); 
 
 const form = document.getElementById('medicineForm');
 const inventoryList = document.getElementById('inventoryList');
@@ -26,7 +27,7 @@ async function fetchInventory() {
       if (diffDays < 0) {
         status = 'EXPIRED';
         className = 'expired';
-      } else if (diffDays <= 7) {
+      } else if (diffDays <= 30) {  // Near expiry within 30 days
         status = 'NEAR EXPIRY';
         className = 'near-expiry';
       }
@@ -57,7 +58,13 @@ form.addEventListener('submit', async (e) => {
   const type = document.getElementById('medType').value;
 
   try {
-    await pb.collection('medicines').create({ name, type, quantity, expiration_date });
+    await pb.collection('medicines').create({
+      name,
+      type,
+      quantity,
+      expiration_date
+    });
+
     form.reset();
     fetchInventory();
   } catch (err) {
@@ -65,5 +72,5 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-// Initial fetch
+// Initial load
 fetchInventory();
